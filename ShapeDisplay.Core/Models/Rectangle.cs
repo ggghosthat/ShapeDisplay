@@ -7,7 +7,7 @@ public class Rectangle : Shape
     public float Width { get; set; }
     public float Height { get; set; }
 
-    public override bool ContainsDot(Graphics graphics, PointF point)
+    public override bool ContainsDot(PointF point)
     {
         float xStart = X;        
         float xEnd = X + Width;

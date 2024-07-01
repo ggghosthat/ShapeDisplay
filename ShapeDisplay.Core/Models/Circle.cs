@@ -6,7 +6,7 @@ public class Circle : Shape
 {
     public float Radius { get; set; }
 
-    public override bool ContainsDot(Graphics graphics, PointF point)
+    public override bool ContainsDot(PointF point)
     {
         var circleCenter = new PointF(X + Radius, Y + Radius);
         return IsPointInsideCircle(point, circleCenter, Radius);
