@@ -4,6 +4,15 @@ namespace ShapeDisplay.Core.Models;
 
 public class Shape
 {
+    private Guid _shapeId;
+
+    public Shape()
+    {
+        _shapeId = Guid.NewGuid();
+    }
+
+    public Guid ShapeId => _shapeId;
+
     public float X { get; set; }
     public float Y { get; set; }
 

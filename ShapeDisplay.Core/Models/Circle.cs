@@ -4,7 +4,25 @@ namespace ShapeDisplay.Core.Models;
 
 public class Circle : Shape 
 {
+
+    public Circle(Point cord, Size size, Color borderColor, Color fillColor)
+    {
+        X = cord.X;
+        Y = cord.Y;
+        Radius = CorrectEdge(size);
+        BorderColor = borderColor;
+        FillColor = fillColor;
+    }
+
     public float Radius { get; set; }
+
+    private int CorrectEdge(Size size)
+    {
+        if (Math.Abs(size.Width) > Math.Abs(size.Height))
+            return size.Width;
+        else
+            return size.Height;
+    }
 
     public override bool ContainsDot(PointF point)
     {
@@ -16,7 +34,8 @@ public class Circle : Shape
     {
         var borderPen = new Pen(BorderColor);
         var fillBrush = new SolidBrush(FillColor);
-        var rectangle = new RectangleF(X, Y, 2*Radius, 2*Radius);
+        var diameter = 2 * Radius;
+        var rectangle = new RectangleF(X, Y, diameter, diameter);
         
         graphics.DrawEllipse(borderPen, rectangle);
         graphics.FillEllipse(fillBrush, rectangle);

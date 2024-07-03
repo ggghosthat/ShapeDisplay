@@ -2,10 +2,28 @@
 
 namespace ShapeDisplay.Core.Models;
 
-public class Triangle : Shape
-{ 
+public class RightTriangle : Shape
+{
+    public RightTriangle(Point cord, Size size, Color borderColor, Color fillColor)
+    {
+        X = cord.X;
+        Y = cord.Y;
+        Edge = CorrectEdge(size);
+        BorderColor = borderColor;
+        FillColor = fillColor;
+    }
+
     public float Edge { get; set; }
+
     public float Angle => 60f;
+
+    private int CorrectEdge(Size size)
+    {
+        if (Math.Abs(size.Width) > Math.Abs(size.Height))
+            return size.Width;
+        else
+            return size.Height;
+    }
 
     public override bool ContainsDot(IList<PointF> polygon, PointF point)
     {
