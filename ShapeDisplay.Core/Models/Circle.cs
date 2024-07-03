@@ -5,53 +5,36 @@ namespace ShapeDisplay.Core.Models;
 
 public class Circle : Shape 
 {
-    private GraphicsPath _path;
-
     public Circle(Point cord, Size size, Color borderColor, Color fillColor)
     {
         InitializeParameters(cord, size, borderColor, fillColor);
-        CreatePath();
     }
 
     public int Diameter { get; set; }
 
-    public override bool ContainsDot(Point point)
+    public override bool HasDot(Point point)
     {
-        int radius = Diameter / 2;
-        var circleCenter = new Point(X + radius, Y + radius);
-        return IsPointInsideCircle(point, circleCenter, radius);
+        bool result = false;
+        using (var path = GetPath())
+            result = path.IsVisible(point);
+        return result;
     }
 
     public override void Draw(Graphics graphics)
     {
-        var borderPen = new Pen(BorderColor);
-        var fillBrush = new SolidBrush(FillColor);
-        
-        graphics.DrawPath(borderPen, _path);
-        graphics.FillPath(fillBrush, _path);
+        using (var path = GetPath())
+        using (var borderPen = new Pen(BorderColor))
+        using (var fillBrush = new SolidBrush(FillColor))
+        {
+            graphics.DrawPath(borderPen, path);
+            graphics.FillPath(fillBrush, path);
+        }
     }
 
     public override void Move(Point destination)
     {
         X = destination.X;
         Y = destination.Y;
-    }
-
-    private bool IsPointInsideCircle(Point point, Point circleCenter, int radius)
-    {
-        //calculate distance between circle's center and desired point
-        float distanceSquared = (point.X - circleCenter.X) * (point.X - circleCenter.Y) + (point.Y - circleCenter.Y) * (point.Y - circleCenter.Y);
-        float distance = (float)Math.Sqrt(distanceSquared);
-
-        //if ditance fewer than radius, point inside the circle
-        return distance <= radius;
-    }
-
-    private void CreatePath()
-    {
-        _path = new();
-        var elliplseFrame = new System.Drawing.Rectangle(X, Y, Diameter, Diameter);
-        _path.AddEllipse(elliplseFrame);
     }
 
     private void InitializeParameters(Point cord, Size size, Color borderColor, Color fillColor)
@@ -62,5 +45,12 @@ public class Circle : Shape
         BorderColor = borderColor;
         FillColor = fillColor;
     }
-
+    
+    private GraphicsPath GetPath()
+    {
+        var elliplseFrame = new System.Drawing.Rectangle(X, Y, Diameter, Diameter);
+        var path = new GraphicsPath();
+        path.AddEllipse(elliplseFrame);
+        return path;
+    }
 }

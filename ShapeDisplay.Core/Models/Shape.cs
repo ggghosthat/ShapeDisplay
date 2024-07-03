@@ -27,7 +27,7 @@ public class Shape
     { }
         
     /// Check if figure (squre, circle) contains input point    
-    public virtual bool ContainsDot(Point point) => 
+    public virtual bool HasDot(Point point) => 
         false;
 
     /// Check if polgon contains input point

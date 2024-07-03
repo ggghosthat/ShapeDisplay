@@ -5,12 +5,9 @@ namespace ShapeDisplay.Core.Models;
 
 public class RightTriangle : Shape
 {
-    private GraphicsPath _path;
-
     public RightTriangle(Point cord, Size size, Color borderColor, Color fillColor)
     {
         InitializeParameters(cord, size, borderColor, fillColor);
-        CreatePath();
     }
         
     public int Edge { get; set; }
@@ -19,26 +16,21 @@ public class RightTriangle : Shape
       
     public override bool ContainsDot(IList<Point> polygon, Point point)
     {
-        int n = polygon.Count;
         bool result = false;
-        for (int i = 0, j = n - 1; i < n; j = i++)
-        {
-            if (((polygon[i].Y > point.Y) != (polygon[j].Y > point.Y)) &&
-                (point.X < (polygon[j].X - polygon[i].X) * (point.Y - polygon[i].Y) / (polygon[j].Y - polygon[i].Y) + polygon[i].X))
-            {
-                result = !result;
-            }
-        }
+        using (var path = GetPath())
+            result = path.IsVisible(point);
         return result;
     }
 
     public override void Draw(Graphics graphics)
     {
-        var borderPen = new Pen(BorderColor);
-        var fillBrush = new SolidBrush(FillColor);
-
-        graphics.DrawPath(borderPen, _path);
-        graphics.FillPath(fillBrush, _path);
+        using (var path = GetPath())
+        using (var borderPen = new Pen(BorderColor))
+        using (var fillBrush= new SolidBrush(FillColor))
+        {
+            graphics.DrawPath(borderPen, path);
+            graphics.FillPath(fillBrush, path);
+        }
     }
 
     public override void Move(Point destination)
@@ -56,7 +48,7 @@ public class RightTriangle : Shape
         FillColor = fillColor;
     }
 
-    private void CreatePath()
+    private GraphicsPath GetPath()
     {
         var rectangle = new System.Drawing.Rectangle(X, Y, Edge, Edge);
 
@@ -67,7 +59,8 @@ public class RightTriangle : Shape
             new Point(rectangle.Left, rectangle.Bottom)
         ];
 
-        _path = new();
-        _path.AddPolygon(points);
+        var path =  new GraphicsPath();
+        path.AddPolygon(points);
+        return path;
     }
 }
