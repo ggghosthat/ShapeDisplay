@@ -10,7 +10,7 @@ public partial class Form1 : Form
     private List<Shape> _shapes = [];
 
     private Graphics _graphic;
-    private ShapeType _shapeType;
+    private ShapeType _shapeType = ShapeType.RECTANGLE;
 
     private Color _borderColor = Color.Red;
     private Color _fillColor = Color.Yellow;
@@ -43,16 +43,16 @@ public partial class Form1 : Form
         _mouseEndPoint = e.Location;
 
         var size = new Size
-        { 
+        {
             Width = _mouseEndPoint.X - _mouseStartPoint.X,
             Height = _mouseEndPoint.Y - _mouseStartPoint.Y
         };
 
         Shape? shape = _shapeType switch
         {
-            ShapeType.RIGHT_TRIANGLE => new RightTriangle(_mouseEndPoint, size, _borderColor, _fillColor),
-            ShapeType.CIRCLE => new Circle(_mouseEndPoint, size, _borderColor, _fillColor),
-            ShapeType.RECTANGLE => new Core.Models.Rectangle(_mouseEndPoint, size, _borderColor, _fillColor),
+            ShapeType.RIGHT_TRIANGLE => new RightTriangle(_mouseStartPoint, size, _borderColor, _fillColor),
+            ShapeType.CIRCLE => new Circle(_mouseStartPoint, size, _borderColor, _fillColor),
+            ShapeType.RECTANGLE => new Core.Models.Rectangle(_mouseStartPoint, size, _borderColor, _fillColor),
             ShapeType.NONE => null
         };
 
@@ -60,22 +60,6 @@ public partial class Form1 : Form
             _shapes.Add(shape);
 
         canvas.Invalidate();
-    }
-
-    private float CorrectStartCordinate(int startCord, int shift)
-    {
-        if (shift < 0)
-            return startCord - shift;
-        else
-            return startCord;
-    }
-
-    private float GetMexByModule(int firstNumber, int secondNumber)
-    {
-        if (Math.Abs(firstNumber) > Math.Abs(secondNumber))
-            return firstNumber;
-        else 
-            return secondNumber;
     }
 
     private void button1_Click(object sender, EventArgs e)
@@ -126,6 +110,14 @@ public partial class Form1 : Form
     {
         if (radioButton2.Checked)
             _shapeType = ShapeType.CIRCLE;
+        else
+            _shapeType = ShapeType.NONE;
+    }
+
+    private void button1_Click_1(object sender, EventArgs e)
+    {
+        if (radioButton1.Checked)
+            _shapeType = ShapeType.RECTANGLE;
         else
             _shapeType = ShapeType.NONE;
     }

@@ -6,25 +6,18 @@ public class Rectangle : Shape
 {
     public Rectangle(Point cord, Size size, Color borderColor, Color fillColor)
     {
-        X = cord.X;
-        Y = cord.Y;
-        Width = size.Width;
-        Height = size.Height;
+        X = CorrectStartCordinate(cord.X, size.Width);
+        Y = CorrectStartCordinate(cord.Y, size.Height);
+        Width = Math.Abs(size.Width);
+        Height = Math.Abs(size.Height);
         BorderColor = borderColor;
         FillColor = fillColor;
     }
 
     public float Width { get; set; }
+
     public float Height { get; set; }
-
-    private int CorrectEdge(Size size)
-    {
-        if (Math.Abs(size.Width) > Math.Abs(size.Height))
-            return size.Width;
-        else
-            return size.Height;
-    }
-
+        
     public override bool ContainsDot(PointF point)
     {
         float xStart = X;        

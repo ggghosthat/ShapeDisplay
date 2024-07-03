@@ -37,6 +37,7 @@
             radioButton1 = new RadioButton();
             radioButton2 = new RadioButton();
             radioButton3 = new RadioButton();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)canvas).BeginInit();
             SuspendLayout();
             // 
@@ -96,6 +97,7 @@
             radioButton1.Appearance = Appearance.Button;
             radioButton1.AutoCheck = false;
             radioButton1.AutoSize = true;
+            radioButton1.BackColor = SystemColors.ActiveCaption;
             radioButton1.Cursor = Cursors.Cross;
             radioButton1.FlatStyle = FlatStyle.Flat;
             radioButton1.Image = (Image)resources.GetObject("radioButton1.Image");
@@ -103,7 +105,7 @@
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(40, 40);
             radioButton1.TabIndex = 5;
-            radioButton1.UseVisualStyleBackColor = true;
+            radioButton1.UseVisualStyleBackColor = false;
             radioButton1.Visible = false;
             radioButton1.CheckedChanged += radioButton1_CheckedChanged;
             // 
@@ -128,6 +130,7 @@
             radioButton3.Appearance = Appearance.Button;
             radioButton3.AutoCheck = false;
             radioButton3.AutoSize = true;
+            radioButton3.BackColor = SystemColors.ControlDarkDark;
             radioButton3.Cursor = Cursors.Cross;
             radioButton3.FlatStyle = FlatStyle.Flat;
             radioButton3.Image = (Image)resources.GetObject("radioButton3.Image");
@@ -135,15 +138,26 @@
             radioButton3.Name = "radioButton3";
             radioButton3.Size = new Size(40, 40);
             radioButton3.TabIndex = 7;
-            radioButton3.UseVisualStyleBackColor = true;
+            radioButton3.UseVisualStyleBackColor = false;
             radioButton3.Visible = false;
             radioButton3.CheckedChanged += radioButton3_CheckedChanged;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(658, 222);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 8;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(743, 450);
+            Controls.Add(button1);
             Controls.Add(radioButton3);
             Controls.Add(radioButton2);
             Controls.Add(radioButton1);
@@ -169,5 +183,6 @@
         private RadioButton radioButton1;
         private RadioButton radioButton2;
         private RadioButton radioButton3;
+        private Button button1;
     }
 }
