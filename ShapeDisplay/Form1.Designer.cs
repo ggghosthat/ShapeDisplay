@@ -28,16 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             canvas = new PictureBox();
             label1 = new Label();
             btnPen = new Button();
             btnFill = new Button();
             label2 = new Label();
-            radioButton1 = new RadioButton();
-            radioButton2 = new RadioButton();
-            radioButton3 = new RadioButton();
-            button1 = new Button();
+            radioButton4 = new RadioButton();
+            radioButton5 = new RadioButton();
+            radioButton6 = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)canvas).BeginInit();
             SuspendLayout();
             // 
@@ -92,75 +90,51 @@
             label2.TabIndex = 3;
             label2.Text = "Fill: ";
             // 
-            // radioButton1
+            // radioButton4
             // 
-            radioButton1.Appearance = Appearance.Button;
-            radioButton1.AutoCheck = false;
-            radioButton1.AutoSize = true;
-            radioButton1.BackColor = SystemColors.ActiveCaption;
-            radioButton1.Cursor = Cursors.Cross;
-            radioButton1.FlatStyle = FlatStyle.Flat;
-            radioButton1.Image = (Image)resources.GetObject("radioButton1.Image");
-            radioButton1.Location = new Point(658, 73);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(40, 40);
-            radioButton1.TabIndex = 5;
-            radioButton1.UseVisualStyleBackColor = false;
-            radioButton1.Visible = false;
-            radioButton1.CheckedChanged += radioButton1_CheckedChanged;
+            radioButton4.AutoSize = true;
+            radioButton4.Font = new Font("Calibri", 14.25F, FontStyle.Bold);
+            radioButton4.Location = new Point(658, 84);
+            radioButton4.Name = "radioButton4";
+            radioButton4.Size = new Size(101, 30);
+            radioButton4.TabIndex = 8;
+            radioButton4.Text = "rectangle";
+            radioButton4.UseCompatibleTextRendering = true;
+            radioButton4.UseVisualStyleBackColor = true;
+            radioButton4.CheckedChanged += radioButton4_CheckedChanged;
             // 
-            // radioButton2
+            // radioButton5
             // 
-            radioButton2.Appearance = Appearance.Button;
-            radioButton2.AutoCheck = false;
-            radioButton2.AutoSize = true;
-            radioButton2.Cursor = Cursors.Cross;
-            radioButton2.FlatStyle = FlatStyle.Flat;
-            radioButton2.Image = (Image)resources.GetObject("radioButton2.Image");
-            radioButton2.Location = new Point(658, 165);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(40, 40);
-            radioButton2.TabIndex = 6;
-            radioButton2.UseVisualStyleBackColor = true;
-            radioButton2.Visible = false;
-            radioButton2.CheckedChanged += radioButton2_CheckedChanged;
+            radioButton5.AutoSize = true;
+            radioButton5.Font = new Font("Calibri", 14.25F, FontStyle.Bold);
+            radioButton5.Location = new Point(658, 112);
+            radioButton5.Name = "radioButton5";
+            radioButton5.Size = new Size(132, 27);
+            radioButton5.TabIndex = 9;
+            radioButton5.Text = "right triangle";
+            radioButton5.UseVisualStyleBackColor = true;
+            radioButton5.CheckedChanged += radioButton5_CheckedChanged;
             // 
-            // radioButton3
+            // radioButton6
             // 
-            radioButton3.Appearance = Appearance.Button;
-            radioButton3.AutoCheck = false;
-            radioButton3.AutoSize = true;
-            radioButton3.BackColor = SystemColors.ControlDarkDark;
-            radioButton3.Cursor = Cursors.Cross;
-            radioButton3.FlatStyle = FlatStyle.Flat;
-            radioButton3.Image = (Image)resources.GetObject("radioButton3.Image");
-            radioButton3.Location = new Point(658, 119);
-            radioButton3.Name = "radioButton3";
-            radioButton3.Size = new Size(40, 40);
-            radioButton3.TabIndex = 7;
-            radioButton3.UseVisualStyleBackColor = false;
-            radioButton3.Visible = false;
-            radioButton3.CheckedChanged += radioButton3_CheckedChanged;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(658, 222);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 8;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click_1;
+            radioButton6.AutoSize = true;
+            radioButton6.Font = new Font("Calibri", 14.25F, FontStyle.Bold);
+            radioButton6.Location = new Point(656, 137);
+            radioButton6.Name = "radioButton6";
+            radioButton6.Size = new Size(71, 27);
+            radioButton6.TabIndex = 10;
+            radioButton6.Text = "circle";
+            radioButton6.UseVisualStyleBackColor = true;
+            radioButton6.CheckedChanged += radioButton6_CheckedChanged;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(743, 450);
-            Controls.Add(button1);
-            Controls.Add(radioButton3);
-            Controls.Add(radioButton2);
-            Controls.Add(radioButton1);
+            ClientSize = new Size(790, 450);
+            Controls.Add(radioButton6);
+            Controls.Add(radioButton5);
+            Controls.Add(radioButton4);
             Controls.Add(btnFill);
             Controls.Add(label2);
             Controls.Add(btnPen);
@@ -180,9 +154,8 @@
         private Button btnPen;
         private Button btnFill;
         private Label label2;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
-        private RadioButton radioButton3;
-        private Button button1;
+        private RadioButton radioButton4;
+        private RadioButton radioButton5;
+        private RadioButton radioButton6;
     }
 }

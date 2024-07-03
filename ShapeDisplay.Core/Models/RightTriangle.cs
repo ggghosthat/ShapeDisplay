@@ -1,23 +1,23 @@
 ﻿using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace ShapeDisplay.Core.Models;
 
 public class RightTriangle : Shape
 {
+    private GraphicsPath _path;
+
     public RightTriangle(Point cord, Size size, Color borderColor, Color fillColor)
     {
-        X = CorrectStartCordinate(cord.X, size.Width);
-        Y = CorrectStartCordinate(cord.Y, size.Height);
-        Edge = CorrectEdge(size);
-        BorderColor = borderColor;
-        FillColor = fillColor;
+        InitializeParameters(cord, size, borderColor, fillColor);
+        CreatePath();
     }
+        
+    public int Edge { get; set; }
 
-    public float Edge { get; set; }
-
-    public float Angle => 60f;
-
-    public override bool ContainsDot(IList<PointF> polygon, PointF point)
+    public int Angle => 60;
+      
+    public override bool ContainsDot(IList<Point> polygon, Point point)
     {
         int n = polygon.Count;
         bool result = false;
@@ -32,21 +32,42 @@ public class RightTriangle : Shape
         return result;
     }
 
-    public override Graphics PrintShape(Graphics graphics)
+    public override void Draw(Graphics graphics)
     {
         var borderPen = new Pen(BorderColor);
         var fillBrush = new SolidBrush(FillColor);
-        var rectangle = new RectangleF(X, Y, Edge, Edge);
 
-        PointF[] rtsh = 
+        graphics.DrawPath(borderPen, _path);
+        graphics.FillPath(fillBrush, _path);
+    }
+
+    public override void Move(Point destination)
+    {
+        X = destination.X;
+        Y = destination.Y;
+    }
+
+    private void InitializeParameters(Point cord, Size size, Color borderColor, Color fillColor)
+    {
+        X = CorrectCordinate(cord.X, size.Width);
+        Y = CorrectCordinate(cord.Y, size.Height);
+        Edge = AlignEdge(size);
+        BorderColor = borderColor;
+        FillColor = fillColor;
+    }
+
+    private void CreatePath()
+    {
+        var rectangle = new System.Drawing.Rectangle(X, Y, Edge, Edge);
+
+        Point[] points =
         [
-            new PointF(rectangle.Left, rectangle.Top),
-            new PointF(rectangle.Right, rectangle.Bottom), 
-            new PointF(rectangle.Left, rectangle.Bottom)
+            new Point(rectangle.Left, rectangle.Top),
+            new Point(rectangle.Right, rectangle.Bottom),
+            new Point(rectangle.Left, rectangle.Bottom)
         ];
 
-        graphics.DrawPolygon(borderPen, rtsh);
-        graphics.FillPolygon(fillBrush, rtsh);
-        return graphics;
+        _path = new();
+        _path.AddPolygon(points);
     }
 }

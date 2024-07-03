@@ -1,5 +1,4 @@
 using ShapeDisplay.Core.Models;
-using ShapeDisplay.Helpers;
 
 using System.Drawing.Drawing2D;
 
@@ -10,14 +9,13 @@ public partial class Form1 : Form
     private List<Shape> _shapes = [];
 
     private Graphics _graphic;
-    private ShapeType _shapeType = ShapeType.RECTANGLE;
+    private ShapeType _shapeType = ShapeType.NONE;
 
     private Color _borderColor = Color.Red;
     private Color _fillColor = Color.Yellow;
 
     private Point _mouseStartPoint;
     private Point _mouseEndPoint;
-
 
     public Form1()
     {
@@ -30,7 +28,7 @@ public partial class Form1 : Form
         _graphic.SmoothingMode = SmoothingMode.HighQuality;
 
         foreach (var shape in _shapes)
-            _graphic = shape.PrintShape(_graphic);
+            shape.Draw(_graphic);
     }
 
     private void canvas_MouseDown(object sender, MouseEventArgs e)
@@ -90,35 +88,22 @@ public partial class Form1 : Form
         return defaultColor;
     }
 
-    private void radioButton1_CheckedChanged(object sender, EventArgs e)
+
+    private void radioButton4_CheckedChanged(object sender, EventArgs e)
     {
-        if (radioButton1.Checked)
+        if (radioButton4.Checked)
             _shapeType = ShapeType.RECTANGLE;
-        else
-            _shapeType = ShapeType.NONE;
     }
 
-    private void radioButton3_CheckedChanged(object sender, EventArgs e)
+    private void radioButton5_CheckedChanged(object sender, EventArgs e)
     {
-        if (radioButton3.Checked)
+        if (radioButton5.Checked)
             _shapeType = ShapeType.RIGHT_TRIANGLE;
-        else
-            _shapeType = ShapeType.NONE;
     }
 
-    private void radioButton2_CheckedChanged(object sender, EventArgs e)
+    private void radioButton6_CheckedChanged(object sender, EventArgs e)
     {
-        if (radioButton2.Checked)
+        if (radioButton6.Checked)
             _shapeType = ShapeType.CIRCLE;
-        else
-            _shapeType = ShapeType.NONE;
-    }
-
-    private void button1_Click_1(object sender, EventArgs e)
-    {
-        if (radioButton1.Checked)
-            _shapeType = ShapeType.RECTANGLE;
-        else
-            _shapeType = ShapeType.NONE;
     }
 }
