@@ -19,18 +19,18 @@ public class Shape
     public Color BorderColor { get; set; }
     public Color FillColor { get; set; }
 
-    // Print current shape on the input Graphics object
     public virtual void Draw(Graphics graphics)
     { }
 
     public virtual void Move(Point point)
     { }
+
+    public virtual void Resize(Size size)
+    { }
         
-    /// Check if figure (squre, circle) contains input point    
     public virtual bool HasDot(Point point) => 
         false;
 
-    /// Correct axis position with shifting
     protected int CorrectCordinate(int startCord, int shift)
     {
         int endCord = (startCord + shift);
@@ -40,7 +40,6 @@ public class Shape
             return startCord;
     }
 
-    //align edge distance based on size box
     protected int AlignEdge(Size sizeBox) =>
         Math.Min(Math.Abs(sizeBox.Width), Math.Abs(sizeBox.Height));
 }

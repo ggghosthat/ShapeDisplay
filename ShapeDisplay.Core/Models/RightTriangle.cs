@@ -11,8 +11,6 @@ public class RightTriangle : Shape
     }
         
     public int Edge { get; set; }
-
-    public int Angle => 60;
       
     public override bool HasDot(Point point)
     {
@@ -37,6 +35,12 @@ public class RightTriangle : Shape
     {
         X = destination.X;
         Y = destination.Y;
+    }
+
+    public override void Resize(Size size)
+    {
+        if (size.Width > 0)
+            Edge = size.Width;
     }
 
     private void InitializeParameters(Point cord, Size size, Color borderColor, Color fillColor)

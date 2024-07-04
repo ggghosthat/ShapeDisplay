@@ -40,6 +40,14 @@ public class Rectangle : Shape
         Y = destination.Y - (Height / 2);
     }
 
+    public override void Resize(Size size)
+    {
+        if (size.Width > 0)
+            Width = size.Width;
+        if(size.Height > 0)
+            Height = size.Height;
+    }
+
     private void InitializeParameters(Point cord, Size size, Color borderColor, Color fillColor)
     {
         X = CorrectCordinate(cord.X, size.Width);

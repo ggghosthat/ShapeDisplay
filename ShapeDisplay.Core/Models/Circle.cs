@@ -10,7 +10,7 @@ public class Circle : Shape
         InitializeParameters(cord, size, borderColor, fillColor);
     }
 
-    public int Diameter { get; set; }
+    public int Radius { get; set; }
 
     public override bool HasDot(Point point)
     {
@@ -33,23 +33,30 @@ public class Circle : Shape
 
     public override void Move(Point destination)
     {
-        int radius = Diameter / 2;
+        int radius = Radius / 2;
         X = destination.X - radius;
         Y = destination.Y - radius;
+    }
+
+    public override void Resize(Size size)
+    {
+        if (size.Width > 0)
+            Radius = size.Width;
     }
 
     private void InitializeParameters(Point cord, Size size, Color borderColor, Color fillColor)
     {
         X = CorrectCordinate(cord.X, size.Width);
         Y = CorrectCordinate(cord.Y, size.Height);
-        Diameter = AlignEdge(size);
+        Radius = AlignEdge(size);
         BorderColor = borderColor;
         FillColor = fillColor;
     }
     
     private GraphicsPath GetPath()
     {
-        var elliplseFrame = new System.Drawing.Rectangle(X, Y, Diameter, Diameter);
+        var diameter = 2 * Radius;
+        var elliplseFrame = new System.Drawing.Rectangle(X, Y, diameter, diameter);
         var path = new GraphicsPath();
         path.AddEllipse(elliplseFrame);
         return path;
