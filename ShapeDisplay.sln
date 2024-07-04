@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShapeDisplay.Core", "ShapeD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShapeDisplay", "ShapeDisplay\ShapeDisplay.csproj", "{156C971C-AFB8-4BD4-B713-9FFC1F552FCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResizeRotatedRectangleV2", "C:\Users\ildar\Downloads\ResizeRotatedRectangleV2\ResizeRotatedRectangleV2\ResizeRotatedRectangleV2\ResizeRotatedRectangleV2.csproj", "{CBFF84EB-3576-460A-9428-644C4700D398}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{156C971C-AFB8-4BD4-B713-9FFC1F552FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{156C971C-AFB8-4BD4-B713-9FFC1F552FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{156C971C-AFB8-4BD4-B713-9FFC1F552FCA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CBFF84EB-3576-460A-9428-644C4700D398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CBFF84EB-3576-460A-9428-644C4700D398}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CBFF84EB-3576-460A-9428-644C4700D398}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CBFF84EB-3576-460A-9428-644C4700D398}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

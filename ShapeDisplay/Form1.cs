@@ -8,15 +8,13 @@ public partial class Form1 : Form
 {
     private List<Shape> _shapes = [];
     private Shape _shape;
+    private ShapeType _shapeType = ShapeType.NONE;
 
     private bool _moving;
-    private bool _resize;
     private Point _mouseStartPoint = Point.Empty;
     private Point _mouseMovePoint = Point.Empty;
     private Point _mouseEndPoint = Point.Empty;
 
-    //private Graphics _graphic;
-    private ShapeType _shapeType = ShapeType.NONE;
     private Color _borderColor = Color.Red;
     private Color _fillColor = Color.Yellow;
 
@@ -37,28 +35,27 @@ public partial class Form1 : Form
     private void canvas_MouseDown(object sender, MouseEventArgs e)
     {
         _mouseStartPoint = e.Location;
+        _mouseMovePoint = e.Location;
+
         bool detected = TryDetectShapeByPoint(e.Location);
 
         if (_shape != null && detected)
         {
             _moving = true;
-            _mouseMovePoint = e.Location;
         }
         else
         {
             _shape = null;
             _moving = false;
-            _mouseMovePoint = e.Location;
         }
-
     }
 
     private void canvas_MouseMove(object sender, MouseEventArgs e)
     {
         if (_moving)
         {
-            _shape.Move(e.Location);
             _mouseMovePoint = e.Location;
+            _shape.Move(_mouseMovePoint);
             canvas.Invalidate();
         }
     }
@@ -81,16 +78,14 @@ public partial class Form1 : Form
 
     private void button1_Click(object sender, EventArgs e)
     {
-        var defaultColor = Color.Red;
-        var color = GetColor(defaultColor);
+        var color = GetColor(_borderColor);
         btnPen.BackColor = color;
         _borderColor = color;
     }
 
     private void btnFill_Click(object sender, EventArgs e)
     {
-        var defaultColor = Color.Red;
-        var color = GetColor(defaultColor);
+        var color = GetColor(_fillColor);
         btnFill.BackColor = color;
         _fillColor = color;
     }
@@ -117,7 +112,8 @@ public partial class Form1 : Form
     {
         if (_shape is ShapeDisplay.Core.Models.Rectangle rectangle)
         {
-            var size = new Size(rtWidthSizeBar.Value, 0);
+            int width = (int)rtWidthSizeBar.Value;
+            var size = new Size(width, 0);
             rectangle.Resize(size);
             canvas.Invalidate();
         }
@@ -127,7 +123,8 @@ public partial class Form1 : Form
     {
         if (_shape is ShapeDisplay.Core.Models.Rectangle rectangle)
         {
-            var size = new Size(0, rtHeightSizeBar.Value);
+            int height = (int)rtHeightSizeBar.Value;
+            var size = new Size(0, height);
             rectangle.Resize(size);
             canvas.Invalidate();
         }
@@ -137,7 +134,8 @@ public partial class Form1 : Form
     {
         if (_shape is RightTriangle rTriangle)
         {
-            var size = new Size(rTriangleSizeBar.Value, 0);
+            int edge = (int)rTriangleSizeBar.Value;
+            var size = new Size(edge, 0);
             rTriangle.Resize(size);
             canvas.Invalidate();
         }
@@ -147,11 +145,13 @@ public partial class Form1 : Form
     {
         if (_shape is Circle circle)
         {
-            var size = new Size(cSizeBar.Value, 0);
+            int radius = (int)cSizeBar.Value;
+            var size = new Size(radius, 0);
             circle.Resize(size);
             canvas.Invalidate();
         }
     }
+
 
     private bool TryDetectShapeByPoint(Point point)
     {
@@ -159,12 +159,13 @@ public partial class Form1 : Form
         {
             if (shape.HasDot(point))
             {
-                _shape = shape; 
+                _shape = shape;
                 UpdateSizebars();
 
                 return true;
             }
         }
+
         return false;
     }
 
@@ -206,8 +207,7 @@ public partial class Form1 : Form
 
     private Color GetColor(Color defaultColor)
     {
-        var coldlg = new ColorDialog();
-
+        using var coldlg = new ColorDialog();
         if (coldlg.ShowDialog() == DialogResult.OK)
             return coldlg.Color;
 
@@ -219,8 +219,8 @@ public partial class Form1 : Form
         if (_shape is RightTriangle rTriangle)
         {
             rTriangleSizeBar.Value = rTriangle.Edge;
-        }        
-        else if(_shape is Circle circle)
+        }
+        else if (_shape is Circle circle)
         {
             cSizeBar.Value = circle.Radius;
         }
