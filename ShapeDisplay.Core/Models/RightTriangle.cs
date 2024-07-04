@@ -14,7 +14,7 @@ public class RightTriangle : Shape
 
     public int Angle => 60;
       
-    public override bool ContainsDot(IList<Point> polygon, Point point)
+    public override bool HasDot(Point point)
     {
         bool result = false;
         using (var path = GetPath())
@@ -62,5 +62,12 @@ public class RightTriangle : Shape
         var path =  new GraphicsPath();
         path.AddPolygon(points);
         return path;
+    }
+
+    private Point CountCenterPoint()
+    {
+        var x = (X + X + (X + Edge)) / 3;
+        var y = (Y + Y + (Y + Edge)) / 3;
+        return new Point(x, y);
     }
 }

@@ -30,10 +30,6 @@ public class Shape
     public virtual bool HasDot(Point point) => 
         false;
 
-    /// Check if polgon contains input point
-    public virtual bool ContainsDot(IList<Point> polygon, Point point) =>
-        false;
-
     /// Correct axis position with shifting
     protected int CorrectCordinate(int startCord, int shift)
     {

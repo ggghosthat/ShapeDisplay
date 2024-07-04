@@ -36,8 +36,8 @@ public class Rectangle : Shape
 
     public override void Move(Point destination)
     {
-        X = destination.X;
-        Y = destination.Y;
+        X = destination.X - (Width / 2);
+        Y = destination.Y - (Height / 2);
     }
 
     private void InitializeParameters(Point cord, Size size, Color borderColor, Color fillColor)

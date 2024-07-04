@@ -36,7 +36,9 @@
             radioButton4 = new RadioButton();
             radioButton5 = new RadioButton();
             radioButton6 = new RadioButton();
+            panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)canvas).BeginInit();
+            panel1.SuspendLayout();
             SuspendLayout();
             // 
             // canvas
@@ -48,13 +50,14 @@
             canvas.TabStop = false;
             canvas.Paint += canvas_Paint;
             canvas.MouseDown += canvas_MouseDown;
+            canvas.MouseMove += canvas_MouseMove;
             canvas.MouseUp += canvas_MouseUp;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12.25F);
-            label1.Location = new Point(658, 12);
+            label1.Location = new Point(14, 9);
             label1.Name = "label1";
             label1.Size = new Size(47, 23);
             label1.TabIndex = 1;
@@ -63,7 +66,7 @@
             // btnPen
             // 
             btnPen.BackColor = Color.Red;
-            btnPen.Location = new Point(711, 12);
+            btnPen.Location = new Point(67, 9);
             btnPen.Name = "btnPen";
             btnPen.Size = new Size(23, 23);
             btnPen.TabIndex = 2;
@@ -73,7 +76,7 @@
             // btnFill
             // 
             btnFill.BackColor = Color.Yellow;
-            btnFill.Location = new Point(711, 44);
+            btnFill.Location = new Point(67, 41);
             btnFill.Name = "btnFill";
             btnFill.Size = new Size(23, 23);
             btnFill.TabIndex = 4;
@@ -84,7 +87,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12.25F);
-            label2.Location = new Point(658, 43);
+            label2.Location = new Point(14, 40);
             label2.Name = "label2";
             label2.Size = new Size(39, 23);
             label2.TabIndex = 3;
@@ -94,7 +97,7 @@
             // 
             radioButton4.AutoSize = true;
             radioButton4.Font = new Font("Calibri", 14.25F, FontStyle.Bold);
-            radioButton4.Location = new Point(658, 84);
+            radioButton4.Location = new Point(14, 81);
             radioButton4.Name = "radioButton4";
             radioButton4.Size = new Size(101, 30);
             radioButton4.TabIndex = 8;
@@ -107,7 +110,7 @@
             // 
             radioButton5.AutoSize = true;
             radioButton5.Font = new Font("Calibri", 14.25F, FontStyle.Bold);
-            radioButton5.Location = new Point(658, 112);
+            radioButton5.Location = new Point(14, 109);
             radioButton5.Name = "radioButton5";
             radioButton5.Size = new Size(132, 27);
             radioButton5.TabIndex = 9;
@@ -119,7 +122,7 @@
             // 
             radioButton6.AutoSize = true;
             radioButton6.Font = new Font("Calibri", 14.25F, FontStyle.Bold);
-            radioButton6.Location = new Point(656, 137);
+            radioButton6.Location = new Point(12, 134);
             radioButton6.Name = "radioButton6";
             radioButton6.Size = new Size(71, 27);
             radioButton6.TabIndex = 10;
@@ -127,24 +130,34 @@
             radioButton6.UseVisualStyleBackColor = true;
             radioButton6.CheckedChanged += radioButton6_CheckedChanged;
             // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.ControlLight;
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(btnPen);
+            panel1.Controls.Add(radioButton6);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(radioButton5);
+            panel1.Controls.Add(btnFill);
+            panel1.Controls.Add(radioButton4);
+            panel1.Location = new Point(648, 12);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(151, 168);
+            panel1.TabIndex = 12;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(790, 450);
-            Controls.Add(radioButton6);
-            Controls.Add(radioButton5);
-            Controls.Add(radioButton4);
-            Controls.Add(btnFill);
-            Controls.Add(label2);
-            Controls.Add(btnPen);
-            Controls.Add(label1);
+            ClientSize = new Size(811, 450);
+            Controls.Add(panel1);
             Controls.Add(canvas);
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)canvas).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -157,5 +170,6 @@
         private RadioButton radioButton4;
         private RadioButton radioButton5;
         private RadioButton radioButton6;
+        private Panel panel1;
     }
 }

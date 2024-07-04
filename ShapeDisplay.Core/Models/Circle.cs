@@ -33,8 +33,9 @@ public class Circle : Shape
 
     public override void Move(Point destination)
     {
-        X = destination.X;
-        Y = destination.Y;
+        int radius = Diameter / 2;
+        X = destination.X - radius;
+        Y = destination.Y - radius;
     }
 
     private void InitializeParameters(Point cord, Size size, Color borderColor, Color fillColor)

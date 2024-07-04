@@ -7,15 +7,18 @@ namespace ShapeDisplay;
 public partial class Form1 : Form
 {
     private List<Shape> _shapes = [];
+    private Shape _shape;
 
     private Graphics _graphic;
     private ShapeType _shapeType = ShapeType.NONE;
 
     private Color _borderColor = Color.Red;
     private Color _fillColor = Color.Yellow;
+    private bool _moving;
 
-    private Point _mouseStartPoint;
-    private Point _mouseEndPoint;
+    private Point _mouseStartPoint = Point.Empty;
+    private Point _mouseMovePoint = Point.Empty;
+    private Point _mouseEndPoint = Point.Empty;
 
     public Form1()
     {
@@ -34,12 +37,51 @@ public partial class Form1 : Form
     private void canvas_MouseDown(object sender, MouseEventArgs e)
     {
         _mouseStartPoint = e.Location;
+        for (int i = _shapes.Count - 1; i >= 0; i--)
+        {
+            if (_shapes[i].HasDot(e.Location))
+            {
+                _shape = _shapes[i];
+                break;
+            }
+        }
+
+        if (_shape!= null)
+        {
+            _moving = true;
+            _mouseMovePoint = e.Location;
+        }
+    }
+    
+    private void canvas_MouseMove(object sender, MouseEventArgs e)
+    {
+        if (_moving)
+        {
+            _shape.Move(e.Location);
+            _mouseMovePoint = e.Location;
+            canvas.Invalidate();
+        }
     }
 
     private void canvas_MouseUp(object sender, MouseEventArgs e)
     {
         _mouseEndPoint = e.Location;
+        if (_moving)
+        {
+            _shape = null;
+            _moving = false;
+            _mouseMovePoint = Point.Empty;
+        }
+        else
+        {
+            DrawShape();
+        }
+        
+        canvas.Invalidate();
+    }
 
+    private void DrawShape()
+    {
         var size = new Size
         {
             Width = _mouseEndPoint.X - _mouseStartPoint.X,
@@ -56,8 +98,6 @@ public partial class Form1 : Form
 
         if (shape != null)
             _shapes.Add(shape);
-
-        canvas.Invalidate();
     }
 
     private void button1_Click(object sender, EventArgs e)
@@ -92,18 +132,24 @@ public partial class Form1 : Form
     private void radioButton4_CheckedChanged(object sender, EventArgs e)
     {
         if (radioButton4.Checked)
+        {
             _shapeType = ShapeType.RECTANGLE;
+        }
     }
 
     private void radioButton5_CheckedChanged(object sender, EventArgs e)
     {
         if (radioButton5.Checked)
+        {
             _shapeType = ShapeType.RIGHT_TRIANGLE;
+        }
     }
 
     private void radioButton6_CheckedChanged(object sender, EventArgs e)
     {
         if (radioButton6.Checked)
+        {
             _shapeType = ShapeType.CIRCLE;
-    }
+        }
+    }    
 }
