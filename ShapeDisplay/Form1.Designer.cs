@@ -55,7 +55,7 @@
             // 
             // canvas
             // 
-            canvas.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            canvas.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
             canvas.BorderStyle = BorderStyle.FixedSingle;
             canvas.Location = new Point(12, 12);
             canvas.Name = "canvas";
